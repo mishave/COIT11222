@@ -1,9 +1,8 @@
 
 # Detailed Explanation of the matrix_mul Function
 
-In this document, we will be breaking down a Python function called `matrix_mul` which performs matrix multiplication. The function takes two matrices, A and B, as inputs and returns a new matrix, C, which contains the result of the multiplication.
+This Python function called `matrix_mul` performs matrix multiplication. The function takes two matrices, A and B, as inputs and returns a new matrix, C, which contains the result of the multiplication.
 
-Here is the code along with the detailed explanation of each part:
 
 ```python
 def matrix_mul(A, B):
