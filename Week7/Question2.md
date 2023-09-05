@@ -1,4 +1,3 @@
-Absolutely! Here's a Python program that accomplishes the task, followed by a step-by-step explanation using Australian English spelling:
 
 ### Step 1: Develop the Python Program
 ```python
