@@ -1,7 +1,7 @@
 
 # Code Explanation
 
-This document provides a detailed explanation of the Python script which consists of two files: `book.py` and `main.py`. The explanations are aimed at students who are not familiar with programming.
+This Python script which consists of two files: `book.py` and `main.py`. The following breaks down what occurs within this program
 
 ## `book.py`
 
@@ -44,7 +44,7 @@ Explanation:
 
 ## `main.py`
 
-This file contains the main script which uses the `Book` class to create book objects and perform file operations. Here is the code along with the detailed explanation:
+This file contains the main script which uses the `Book` class to create book objects and perform file operations.
 
 ```python
 from book import Book
@@ -89,7 +89,7 @@ Explanation:
 - `title = values[0].strip()`, `author = values[1].strip()`, and `publication_year = int(values[2].strip())` extract the title, author, and publication year from the list of values, and remove any leading and trailing whitespace from the title and author. The `int(...)` function converts the publication year to an integer.
 - `lst.append(Book(title, author, publication_year))` creates a new `Book` object with the extracted values and adds it to the list `lst`.
 
-The following part of the `main.py` file reads data from a "books.txt" file, creates several new `Book` objects, adds them to a list, and then writes this updated list to a new "books2.txt" file. This segment of the code will be explained in the next update of this document.
+The following part of the `main.py` file reads data from a "books.txt" file, creates several new `Book` objects, adds them to a list, and then writes this updated list to a new "books2.txt" file.
 
 ```python
 # Read the books file
