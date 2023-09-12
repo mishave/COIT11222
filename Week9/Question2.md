@@ -19,6 +19,21 @@ except FileNotFoundError:
     print("File: {} deosnot exist.".format(file_path))
 ```
 **You will need to add a txt file with numbers on each line**
+```txt
+1
+2
+3
+4
+five
+5
+six
+6
+seven
+8
+9
+ten
+10
+```
 ## Code Breakdown
 
 ### Initialising the File Path
