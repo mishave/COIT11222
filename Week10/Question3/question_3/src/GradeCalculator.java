@@ -4,7 +4,7 @@ public class GradeCalculator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter student ID: ");
+        System.out.print("Enter mark");
         String student_id = scanner.nextLine();
 
         System.out.print("Enter student last name: ");
