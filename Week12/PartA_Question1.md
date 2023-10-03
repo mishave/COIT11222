@@ -20,6 +20,61 @@ def word_match(words, word):
     return i
 ```
 
+### Explanation:
+
+**Function Definition**
+
+```python
+def word_match(words, word):
+```
+
+This line starts the definition of a function named `word_match`. This function takes in two parameters:
+
+- `words`: A list of words (or items).
+- `word`: A single word (or item) that you want to find in the `words` list.
+
+**Initialise the Index**
+
+```python
+    index = -1
+```
+
+Here, a variable named `index` is set to `-1`. This is a common practice to indicate that, initially, the `word` is not found in the `words` list. If the `word` isn't found by the end of the function, `-1` will be returned, signaling that the word doesn't exist in the list.
+
+**Loop through the List**
+
+```python
+    for (i, item) in enumerate(words):
+```
+
+This line starts a loop that goes through each `item` in the `words` list. The `enumerate` function is used to get both the position (`i`) and the value (`item`) of each word in the `words` list.
+
+**Check for a Non-Match**
+
+```python
+        if item != word:
+```
+
+Here, the code checks if the current `item` in the list is NOT equal to the `word` we're looking for.
+
+**If Non-Match Found**
+
+```python
+            i = index
+            break
+```
+
+If the current `item` is not the `word` we're looking for, the function sets `i` to `-1` (the value of `index`). Then, it breaks out of the loop immediately. This means the function stops looking for the word as soon as it finds a word that doesn't match, which isn't typically the desired behavior.
+
+**Return the Result**
+
+```python
+    return i
+```
+
+Finally, the function returns the value of `i`. If the word was found, it would return its position. If not, it would return `-1`, but due to the previous logic, it will always return `-1` unless the word you're looking for is the first item in the list.
+
+
 **(a) Does this function contain an error? If there is an error, could you identify the type of error and suggest how to rectify it?**
 
 Yes, the function contains a semantic error. The logic in the loop is supposed to find a match, but instead, it breaks the loop if the word doesn't match. This is not the intended behavior. To rectify it, the condition should be changed from `if item != word:` to `if item == word:`.
