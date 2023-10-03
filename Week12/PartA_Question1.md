@@ -113,3 +113,50 @@ print(index)
 4. Test with a list containing duplicate words.
 5. Test with different types of strings (uppercase, lowercase, mixed-case, strings with spaces or special characters).
 6. Test with a large list to check for efficiency.
+
+
+
+
+## Additional context:
+### What is `enumerate()`?
+
+`enumerate()` is a built-in Python function that allows you to loop through items in a list (or other iterable objects) while also getting the index (position) of the current item, in addition to its value.
+
+### How does it work?
+
+When you use `enumerate()`, it returns pairs of data for each item in your list. The first item of the pair is the index (i.e., the position) and the second is the value.
+
+For example, if you have a list `['a', 'b', 'c']`, `enumerate()` would process it like this:
+
+- First pass: `0, 'a'` (0 is the index, 'a' is the value)
+- Second pass: `1, 'b'`
+- Third pass: `2, 'c'`
+
+### Code Breakdown:
+
+In the code snippet:
+
+```python
+for (i, item) in enumerate(words):
+```
+
+- `enumerate(words)` processes the `words` list.
+- `(i, item)` captures the output from `enumerate()`. 
+  - `i` captures the index (the position in the list).
+  - `item` captures the value (the actual word from the list).
+
+So, as you loop through `words` with `enumerate()`, `i` gives you the position of the current word, and `item` gives you the word itself.
+
+### Why use `enumerate()`?
+
+There are many ways to loop through items in a list in Python. One common way is to just get each value:
+
+```python
+for item in words:
+```
+
+But what if you also want to know the position of `item` in `words`? That's when `enumerate()` is very handy. It saves you from having to manually keep track of the index, making the code cleaner and more Pythonic.
+
+### In Summary:
+
+Whenever you see `enumerate()` in Python, think: "Ah, this is looping through items and also tracking their positions in the list!"
