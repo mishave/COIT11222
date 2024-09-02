@@ -1,53 +1,57 @@
+### **Step 1: Read the File**
+To start, you'll need to read the content of the original file. Python provides simple functions for file handling.
 
-### Step 1: Develop the Python Program
+- Open the file in read mode using the `open()` function.
+- Use the `readlines()` method to read all lines at once, which stores each line as an element in a list.
+
+**Example Code:**
+
 ```python
-def reverse_lines(input_file, output_file):
-    with open(input_file, 'r') as file:
-        lines = file.readlines()
-    
-    lines_reversed = lines[::-1]
-    
-    with open(output_file, 'w') as file:
-        file.writelines(lines_reversed)
-
-# Input file name
-input_file = "question2.txt"
-
-# Output file name
-output_file = "reversed_question2.txt"
-
-# Calling the function
-reverse_lines(input_file, output_file)
+with open("question2.txt", "r") as file:
+    lines = file.readlines()  # This reads all lines into a list
 ```
 
-### Step 2: Explanation
+### **Step 2: Reverse the List of Lines**
+Once you have the lines in a list, the next step is to reverse their order.
 
-1. **Function Definition**
-   - **`def reverse_lines(input_file, output_file):`**
-     We define a function named `reverse_lines` which takes two arguments: `input_file` (the file to read from) and `output_file` (the file to write to).
+- Use the `reverse()` method of the list to invert the order of its elements.
 
-2. **Reading the File**
-   - **`with open(input_file, 'r') as file:`**
-     We open the input file in read mode ('r') using a context manager (with statement), which ensures the file is closed automatically at the end of the block.
-   - **`lines = file.readlines()`**
-     We read all the lines from the file and store them in a list called `lines`.
+**Example Code:**
 
-3. **Reversing the Lines**
-   - **`lines_reversed = lines[::-1]`**
-     We create a new list called `lines_reversed` which contains all the lines from the `lines` list but in reversed order (this is achieved using slicing with a step of -1).
+```python
+lines.reverse()  # This reverses the list of lines in place
+```
 
-4. **Writing the Reversed Lines to a New File**
-   - **`with open(output_file, 'w') as file:`**
-     We open the output file in write mode ('w'), again using a context manager.
-   - **`file.writelines(lines_reversed)`**
-     We write the reversed lines to the output file using the `writelines` method.
+### **Step 3: Write the Reversed Lines to a New File**
+After reversing the lines, you will write them to a new file. This involves opening (or creating) a new file and writing the lines to it.
 
-5. **Calling the Function**
-   - We specify the input file name (`"question2.txt"`) and the output file name (`"reversed_question2.txt"`) as strings.
-   - **`reverse_lines(input_file, output_file)`**
-     We call the `reverse_lines` function with the input and output file names as arguments.
+- Open a new file in write mode.
+- Use the `writelines()` method to write the reversed list of lines to the new file.
 
-### Step 3: Example Walkthrough
+**Example Code:**
+
+```python
+with open("reversed_question2.txt", "w") as new_file:
+    new_file.writelines(lines)  # Write the reversed lines to the new file
+```
+
+### **Step 4: Combine All Steps into One Program**
+Here’s how the complete script will look after combining all the steps:
+
+```python
+# Open the original file and read lines
+with open("question2.txt", "r") as file:
+    lines = file.readlines()
+
+# Reverse the list of lines
+lines.reverse()
+
+# Open a new file and write the reversed lines
+with open("reversed_question2.txt", "w") as new_file:
+    new_file.writelines(lines)
+```
+
+### **Expected Output:**
 If we use the "question2.txt" file containing:
 
 ```
@@ -68,4 +72,5 @@ Line 2: This is the second line.
 Line 1: This is the first line.
 ```
 
-I hope this helps! Let me know if you have any further questions.
+### **Notes:**
+- Ensure to always close files properly after operations are complete. Using the `with` statement as shown helps manage this by automatically closing the file once the block of code is exited.
