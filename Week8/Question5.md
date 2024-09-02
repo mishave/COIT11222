@@ -1,67 +1,112 @@
+### **Question Five:**
+The transpose of a matrix is a new matrix obtained by interchanging its rows and columns. In other words, it flips the original matrix over its main diagonal (from the top-left corner to the bottom-right corner).
 
-# Detailed Explanation of the transpose_matrix Function
+Write a Python function `transpose_matrix(matrix)` that takes a matrix represented as a nested list and returns its transpose.
 
-This Python function called `transpose_matrix`, computes the transpose of a given matrix. The transpose of a matrix is a new matrix obtained by interchanging its rows and columns. In other words, it flips the original matrix over its main diagonal.
+### **Understanding Matrix Transposition:**
+
+Given an original matrix `A` with dimensions **m x n**:
+- The transpose of `A`, denoted as `A^T`, will have dimensions **n x m**.
+- Each element `A[i][j]` in the original matrix becomes `A^T[j][i]` in the transposed matrix.
+
+### **Task Breakdown:**
+
+This task involves creating a function to transpose a matrix by swapping rows and columns. Let's break down the steps to implement the function.
+
+---
+
+### **Step 1: Determine the Dimensions of the Matrix**
+
+To transpose a matrix, we need to understand its current dimensions:
+- Retrieve the number of rows (`m`) and the number of columns (`n`) of the original matrix.
+
+- The number of rows in the original matrix becomes the number of columns in the transposed matrix, and vice versa.
+
+**Example Code:**
 
 ```python
 def transpose_matrix(matrix):
-    # Get the dimensions of the original matrix
-    rows = len(matrix)
-    cols = len(matrix[0])
+    rows = len(matrix)  # Number of rows in the original matrix
+    cols = len(matrix[0])  # Number of columns in the original matrix
 ```
 
-Explanation:
-- `def transpose_matrix(matrix):` defines a new function named `transpose_matrix` that takes one parameter, `matrix`, which is the matrix to be transposed.
-- `rows = len(matrix)` calculates the number of rows in the original matrix by getting the length of the list representing the matrix.
-- `cols = len(matrix[0])` calculates the number of columns in the original matrix by getting the length of the first row (list) in the matrix.
+### **Step 2: Initialize the Transposed Matrix**
+
+Create a new matrix `transpose` with dimensions **n x m** filled with zeros or empty values initially. This matrix will store the transposed values.
+
+- Initialize a nested list with `cols` rows and `rows` columns.
+
+**Example Code:**
 
 ```python
-    # Create an empty matrix with swapped dimensions (cols x rows)
-    transpose = []
-    for j in range(cols):
-        transpose.append([0] * rows)
+    # Initialize the transposed matrix with dimensions n x m
+    transpose = [[0 for _ in range(rows)] for _ in range(cols)]
 ```
 
-Explanation:
-- `transpose = []` initializes an empty list to store the transpose of the original matrix.
-- The `for` loop iterates over the range of columns in the original matrix.
-- Inside the loop, `transpose.append([0] * rows)` adds a new row to the `transpose` matrix, initializing it with zeros. The number of rows in the transposed matrix is equal to the number of columns in the original matrix.
+### **Step 3: Populate the Transposed Matrix**
+
+Using nested loops, iterate through the elements of the original matrix and assign each element to its transposed position in the new matrix.
+
+- The outer loop iterates over the rows of the original matrix.
+- The inner loop iterates over the columns of the original matrix.
+- Assign the value of `matrix[i][j]` to `transpose[j][i]`.
+
+**Example Code:**
 
 ```python
-    # Populate the transpose matrix
+    # Populate the transposed matrix with the elements from the original matrix
     for i in range(rows):
         for j in range(cols):
             transpose[j][i] = matrix[i][j]
+```
+
+### **Step 4: Combine All Steps into One Function**
+
+Here’s the complete function that combines all the steps:
+
+```python
+def transpose_matrix(matrix):
+    rows = len(matrix)  # Number of rows in the original matrix
+    cols = len(matrix[0])  # Number of columns in the original matrix
+    
+    # Initialize the transposed matrix with dimensions n x m
+    transpose = [[0 for _ in range(rows)] for _ in range(cols)]
+    
+    # Populate the transposed matrix with the elements from the original matrix
+    for i in range(rows):
+        for j in range(cols):
+            transpose[j][i] = matrix[i][j]
+    
     return transpose
 ```
 
-Explanation:
-- These lines populate the transposed matrix with the appropriate values from the original matrix.
-- The nested `for` loop iterates over each element in the original matrix.
-- Inside the nested loop, `transpose[j][i] = matrix[i][j]` assigns the value from the original matrix to the corresponding position in the transposed matrix, effectively swapping the row and column indices.
-- Finally, `return transpose` returns the transposed matrix.
+### **Example Usage:**
+
+To test the function, use the following matrix:
 
 ```python
 # Example matrix
-original_matrix = [
+A = [
     [1, 2, 3],
     [4, 5, 6]
 ]
 
-# Calculate the transpose
-transposed_matrix = transpose_matrix(original_matrix)
-
-# Print the original and transposed matrices
-print("Original Matrix:")
-for row in original_matrix:
-    print(row)
-
-print("\nTransposed Matrix:")
-for row in transposed_matrix:
-    print(row)
+# Get the transpose of the matrix
+transpose_A = transpose_matrix(A)
+print(transpose_A)  # Output should be [[1, 4], [2, 5], [3, 6]]
 ```
 
-Explanation:
-- An example matrix `original_matrix` is defined.
-- `transposed_matrix = transpose_matrix(original_matrix)` calls the `transpose_matrix` function with `original_matrix` as the argument, and stores the result in `transposed_matrix`.
-- The subsequent lines of code print the original matrix and the transposed matrix to the console, to visually confirm the function's operation.
+### **Expected Output:**
+
+If you input the matrix as shown in the example, the output should be:
+
+```
+[[1, 4],
+ [2, 5],
+ [3, 6]]
+```
+
+### **Notes:**
+
+- Make sure to handle matrices of different dimensions (e.g., square matrices, row vectors, and column vectors) to ensure your function works for any valid matrix input.
+- Testing your function with various input matrices will help confirm that it behaves as expected for all cases.
