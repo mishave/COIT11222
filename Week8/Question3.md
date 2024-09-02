@@ -1,124 +1,224 @@
+### **Question Three:**
+In Week 6, you worked on a tutorial question where you developed an application involving the creation of five instances of the `Book` class. This application was structured into two distinct modules:
+- `main.py`
+- `book.py`
 
-# Code Explanation
+Retrieve these modules from Moodle or your local storage. They encompass the source code you've previously crafted. Furthermore, there's a file titled `"books.txt"` that holds information about the books. The sample format of this file is shown below:
 
-This Python script which consists of two files: `book.py` and `main.py`. The following breaks down what occurs within this program
+Each line in this file represents data for a `Book` object in the following format:
 
-## `book.py`
-
-This file defines a `Book` class, which is a blueprint for creating `Book` objects. Each `Book` object can store information about a book's title, author, and publication year. Here is the code and the detailed explanation of each part:
-
-```python
-class Book:
-    def __init__(self, title, author, publication_year):
-        self.title = title
-        self.author = author
-        self.publication_year = publication_year
+```
+Title|Author|Year
 ```
 
-Explanation:
-- `class Book:` defines a new class named `Book`.
-- `def __init__(self, title, author, publication_year):` defines the constructor method that is called when a new `Book` object is created. It takes three parameters: title, author, and publication year.
-- The lines inside the constructor method assign the values passed as parameters to the object's attributes: `self.title`, `self.author`, and `self.publication_year`.
+### **Explanation of Each Component:**
+- **Title**: Represents the value of the `title` attribute of the `Book` object.
+- **Author**: Represents the value of the `author` attribute of the `Book` object.
+- **Year**: Represents the value of the `publication_year` attribute of the `Book` object.
 
-```python
-    def __str__(self):
-        return "{} by {}, published in {}".format(self.title, self.author, self.publication_year)
+### **Task Breakdown:**
+To complete this task, you will:
+1. **Read the contents of the `"books.txt"` file** and import the book data into a `books` list.
+2. **Add five additional `Book` objects** to the `books` list:
+   - `book6 = Book("Brave New World", "Aldous Huxley", 1932)`
+   - `book7 = Book("The Lord of the Rings", "J.R.R. Tolkien", 1954)`
+   - `book8 = Book("The Alchemist", "Paulo Coelho", 1988)`
+   - `book9 = Book("The Chronicles of Narnia", "C.S. Lewis", 1950)`
+   - `book10 = Book("Crime and Punishment", "Fyodor Dostoevsky", 1866)`
+3. **Write the information for the ten `Book` objects** to a new file named `"books1.txt"`.
+   
+The resulting `"books1.txt"` file should appear as follows:
+
+```
+Brave New World|Aldous Huxley|1932
+The Lord of the Rings|J.R.R. Tolkien|1954
+The Alchemist|Paulo Coelho|1988
+The Chronicles of Narnia|C.S. Lewis|1950
+Crime and Punishment|Fyodor Dostoevsky|1866
+... (plus the contents from the original "books.txt")
 ```
 
-Explanation:
-- `def __str__(self):` defines a method that returns a string representation of a `Book` object.
-- The `return` statement uses the `format` method to create a string that displays the book's details in a readable format.
+### **Steps to Implement the Task:**
+
+#### **Step 1: Read Data from "books.txt"**
+
+1. **Open and read the file** `"books.txt"`.
+2. **Parse each line** to extract the title, author, and year, and create a `Book` object for each line.
+3. **Append each `Book` object** to a list called `books`.
+
+**Example Code:**
 
 ```python
-    def __eq__(self, other):
-        if isinstance(other, Book):
-            return (self.title == other.title and self.author == other.author 
-                    and self.publication_year == other.publication_year)
-        return False
-```
-
-Explanation:
-- `def __eq__(self, other):` defines a method to compare two `Book` objects to see if they are equal, based on their attributes.
-- `if isinstance(other, Book):` checks if the `other` object is an instance of the `Book` class.
-- The `return` statement inside the `if` block returns `True` if all the attributes of the two `Book` objects are equal, and `False` otherwise.
-
-## `main.py`
-
-This file contains the main script which uses the `Book` class to create book objects and perform file operations.
-
-```python
-from book import Book
-```
-
-Explanation:
-- This line imports the `Book` class from the `book.py` file, so that we can use it in this script.
-
-```python
-def write_file(lst, file_path):
-    with open(file_path, "w") as file:
-        for book in lst:
-            file.write("{}| {}| {}\n".format(book.title, 
-                                                book.author, 
-                                                book.publication_year))
-```
-
-Explanation:
-- `def write_file(lst, file_path):` defines a function named `write_file` that takes two parameters: a list of `Book` objects (`lst`) and a file path (`file_path`).
-- `with open(file_path, "w") as file:` opens the file in write mode ('w'). If the file does not exist, it will be created. The `with` statement ensures that the file is closed properly at the end of the block.
-- The `for` loop iterates over each `book` object in the list `lst`.
-- Inside the loop, `file.write(...)` writes the details of each book (title, author, and publication year) to the file, separated by the pipe ('|') character. The '\n' at the end writes a newline character, so each book's details are written on a new line.
-
-```python
-def read_file(lst, file_path):
-    with open(file_path, "r") as file:
+def read_file(lst, file_name):
+    with open(file_name, "r") as file:
         for line in file:
-            line = line.strip()
-            values = line.split("|")
-            title = values[0].strip()
-            author = values[1].strip()
-            publication_year = int(values[2].strip())
-            lst.append(Book(title, author, publication_year))
+            title, author, year = line.strip().split("|")  # Split the line by '|'
+            book = Book(title, author, int(year))  # Create a Book object
+            lst.append(book)  # Add the Book object to the list
+
+books = []
+read_file(books, "books.txt")
 ```
 
-Explanation:
-- `def read_file(lst, file_path):` defines a function named `read_file` that takes a list (`lst`) and a file path (`file_path`) as parameters.
-- `with open(file_path, "r") as file:` opens the file in read mode ('r').
-- The `for` loop iterates over each line in the file.
-- `line = line.strip()` removes any leading and trailing whitespace from the line.
-- `values = line.split("|")` splits the line into a list of values using the pipe ('|') character as the delimiter.
-- `title = values[0].strip()`, `author = values[1].strip()`, and `publication_year = int(values[2].strip())` extract the title, author, and publication year from the list of values, and remove any leading and trailing whitespace from the title and author. The `int(...)` function converts the publication year to an integer.
-- `lst.append(Book(title, author, publication_year))` creates a new `Book` object with the extracted values and adds it to the list `lst`.
+#### **Step 2: Add Five Additional Book Objects**
 
-The following part of the `main.py` file reads data from a "books.txt" file, creates several new `Book` objects, adds them to a list, and then writes this updated list to a new "books2.txt" file.
+1. **Manually create five new `Book` objects** with the specified titles, authors, and publication years.
+2. **Append these new `Book` objects** to the `books` list.
+
+**Example Code:**
 
 ```python
-# Read the books file
-file_name = "books.txt"
-file_name1 = "books2.txt"
-book_list = []
-read_file(book_list, file_name)
-
+# Creating additional Book objects
 book6 = Book("Brave New World", "Aldous Huxley", 1932)
 book7 = Book("The Lord of the Rings", "J.R.R. Tolkien", 1954)
 book8 = Book("The Alchemist", "Paulo Coelho", 1988)
 book9 = Book("The Chronicles of Narnia", "C.S. Lewis", 1950)
 book10 = Book("Crime and Punishment", "Fyodor Dostoevsky", 1866)
 
-book_list.append(book6)
-book_list.append(book7)
-book_list.append(book8)
-book_list.append(book9)
-book_list.append(book10)
-
-# Write all the book in the book_list
-write_file(book_list, file_name1)
+# Adding the new books to the list
+books.extend([book6, book7, book8, book9, book10])
 ```
 
-Explanation:
-- `file_name = "books.txt"` and `file_name1 = "books2.txt"`: These lines define two variables to hold the names of the files we will be reading from and writing to.
-- `book_list = []`: This line creates an empty list named `book_list` which will be used to store `Book` objects.
-- `read_file(book_list, file_name)`: This line calls the `read_file` function to read the book details from the "books.txt" file and populate the `book_list` with `Book` objects.
-- The next set of lines creates five new `Book` objects with hardcoded values for the title, author, and publication year.
-- `book_list.append(book6)`, `book_list.append(book7)`, etc.: These lines add the newly created `Book` objects to the `book_list`.
-- `write_file(book_list, file_name1)`: This line calls the `write_file` function to write all the book details in the `book_list` to the "books2.txt" file.
+#### **Step 3: Write Data to "books1.txt"**
 
+1. **Open or create the file** `"books1.txt"` in write mode.
+2. **Write each book’s data** from the `books` list to the file in the format `Title|Author|Year`.
+
+**Example Code:**
+
+```python
+def write_file(lst, file_name):
+    with open(file_name, "w") as file:
+        for book in lst:
+            file.write(f"{book.title}|{book.author}|{book.publication_year}\n")
+
+write_file(books, "books1.txt")
+```
+
+### **Final Steps:**
+
+1. **Test your code** to ensure that it reads and writes the book data correctly.
+2. **Submit a zip file** containing:
+   - `main.py`
+   - `book.py`
+   - `books.txt`
+   - `books1.txt`
+
+Make sure your program correctly handles file reading and writing and that the data is formatted properly in the output file.
+
+### **Important Note:**
+- **Why use `extend` instead of `append`?**
+  - The `extend` method is used because it adds each `Book` object individually to the `books` list. If you used `append`, the entire list of new `Book` objects would be added as a single element, creating a nested list. By using `extend`, the `books` list remains flat, with each `Book` object as a separate entry.
+  
+  - **Example:**
+    - Using `append` with a list of books:
+      ```python
+      books.append([book6, book7, book8, book9, book10])
+      # books would become: [..., [book6, book7, book8, book9, book10]]
+      ```
+      Instead, we would have to call append for each item individually or
+    - Using `extend` with a list of books:
+      ```python
+      books.extend([book6, book7, book8, book9, book10])
+      # books would become: [..., book6, book7, book8, book9, book10]
+      ```
+
+### **Full Code Snippet for Reference:**
+
+Below is the full code snippet for your reference that integrates reading from a file, adding new books, and writing to a new file:
+
+```python
+from book import Book
+
+def find_copies(lst, this_book):
+    count = 0
+    for book in lst:
+        if book == this_book:
+            count = count + 1
+    return count
+
+# Function to read book data from a file
+def read_file(lst, file_name):
+    with open(file_name, "r") as file:
+        for line in file:
+            title, author, year = line.strip().split("|")  # Split the line by '|'
+            book = Book(title, author, int(year))  # Create a Book object
+            lst.append(book)  # Add the Book object to the list
+
+# List to hold Book objects
+books = []
+
+# Read existing books from "books.txt"
+read_file(books, "books.txt")
+
+# Add five additional Book objects
+book6 = Book("Brave New World", "Aldous Huxley", 1932)
+book7 = Book("The Lord of the Rings", "J.R.R. Tolkien", 1954)
+book8 = Book("The Alchemist", "Paulo Coelho", 1988)
+book9 = Book("The Chronicles of Narnia", "C.S. Lewis", 1950)
+book10 = Book("Crime and Punishment", "Fyodor Dostoevsky", 1866)
+
+# Use extend to add all new books at once
+books.extend([book6, book7, book8, book9, book10])
+
+# Alternative: Use append to add each book individually (commented out)
+# books.append(book6)
+# books.append(book7)
+# books.append(book8)
+# books.append(book9)
+# books.append(book10)
+
+# Function to write book data to a file
+def write_file(lst, file_name):
+    with open(file_name, "w") as file:
+        for book in lst:
+            file.write(f"{book.title}|{book.author}|{book.publication_year}\n")
+
+# Write all books to "books1.txt"
+write_file(books, "books1.txt")
+
+# Example usage for finding copies of a specific book
+book_list = []
+book1 = Book("The Catcher in the Rye", "J.D. Salinger", 1951)
+book2 = Book("To Kill a Mockingbird", "Harper Lee", 1960)
+book3 = Book("1984", "George Orwell", 1949)
+book4 = Book("The Great Gatsby", "F. Scott Fitzgerald", 1925)
+book5 = Book("The Catcher in the Rye", "J.D. Salinger", 1951)
+
+book_list.append(book1)
+book_list.append(book2)
+book_list.append(book3)
+book_list.append(book4)
+book_list.append(book5)
+
+# Print all the books in the book_list
+for book in book_list:
+    print(book)
+
+# Find number of copies of the book "The Catcher in the Rye"
+print("Title: {}, Copies: {}".format(book1.title, find_copies(book_list, book1)))
+
+# Find number of copies of the book "To Kill a Mockingbird"
+print("Title: {}, Copies: {}".format(book2.title, find_copies(book_list, book2)))
+```
+
+```python
+class Book:
+    def __init__(self, title, author, publication_year):
+        # Instance variables for each book instance
+        self.title = title
+        self.author = author
+        self.publication_year = publication_year
+
+    def __str__(self):
+        # Instance method to return book information as a string
+        return "{} by {}, published in {}".format(self.title, self.author, self.publication_year)
+
+    def __eq__(self, other):
+        # Instance method to compare two Book instances based on their attributes
+        if isinstance(other, Book):
+            return (self.title == other.title and self.author == other.author 
+                    and self.publication_year == other.publication_year)
+        return False
+
+```
