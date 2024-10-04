@@ -57,7 +57,7 @@ b. `print(n%2 == 0 or n%3 == 0)`
 
 ### 18. Program Segment Evaluation:
 
-You've mentioned the instruction but haven't provided the program segments. Please provide them for evaluation.
+???
 
 ### 19. Output of the Given Code:
 
